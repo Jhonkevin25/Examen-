@@ -1,0 +1,39 @@
+Crea un microservicio Spring Boot completo para la gestión de Cursos con las siguientes características:
+
+ENTIDAD:
+- Nombre: Curso
+- Campos: nombre (String), descripcion (String), categoria (String),
+  duracionHoras (Integer), precio (BigDecimal), activo (Boolean),
+  fechaInicio (LocalDate), fechaFin (LocalDate), nivel (String),
+  capacidadMaxima (Integer)
+
+ARQUITECTURA EN CAPAS:
+- Controller: recibe peticiones HTTP y delega al Service
+- Service: contiene la lógica de negocio
+- Repository: accede a la base de datos usando JpaRepository
+- DTO (CursoDTO): objeto de transferencia con métodos fromEntity() y toEntity()
+
+ENDPOINTS REST COMPLETOS:
+- GET /cursos → listar todos los cursos
+- GET /cursos/paginado?page=0&size=5&sortBy=nombre&dir=asc → paginación
+- GET /cursos/buscar?nombre=X → búsqueda parcial paginada
+- GET /cursos/{id} → obtener por ID
+- POST /cursos → crear nuevo curso (retorna 201)
+- PUT /cursos/{id} → actualizar completo (reemplaza todos los campos)
+- PATCH /cursos/{id} → actualizar parcial (solo campos no nulos)
+- DELETE /cursos/{id} → eliminar (retorna 204)
+
+PAGINACIÓN:
+- Usar Page<T> y Pageable de Spring Data JPA
+- Soporte para ordenamiento por cualquier campo
+- Respuesta con metadatos: totalElements, totalPages, first, last
+
+CONFIGURACIÓN:
+- Java 17
+- Spring Boot 3.5.14
+- Gradle - Groovy
+- Base de datos H2 en memoria
+- Puerto 8081
+- Integración con Eureka Discovery Client en http://localhost:8761/eureka
+- Spring Boot Actuator habilitado
+- Lombok para reducir boilerplate
